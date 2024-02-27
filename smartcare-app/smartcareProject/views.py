@@ -49,6 +49,19 @@ def patient_login(request):
 
     return render(request, 'patient_login.html', {'form': form})
 
+def patient_signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            # Redirect to patient dashboard or any other patient-specific page
+            return redirect('patient_dashboard')
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, 'patient_signup.html', {'form': form})
+
 def admin_login(request):
     if request.method == 'POST':
         form = AdminLoginForm(request.POST)
