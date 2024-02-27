@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Select Your User Role</h2>
+    <div class="role-buttons">
+        <button class="role-button" onclick="selectRole('staff')">Staff</button>
+        <button class="role-button" onclick="selectRole('patient')">Patient</button>
+        <button class="role-button" onclick="selectRole('admin')">Admin</button>
+    </div>
+
+    <script>
+        function selectRole(role) {
+            // Redirect to the login page
+            window.location.href = '/login/';
+        }
+    </script>
+{% endblock %}
+
