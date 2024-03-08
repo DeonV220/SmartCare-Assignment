@@ -46,8 +46,11 @@ def patient_login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
+<<<<<<< HEAD
             # Fetch user data from the database
          
+=======
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3
 
             if user is not None:
                 if user.is_active:
@@ -57,8 +60,12 @@ def patient_login(request):
                     # Fetch user data from the database
                     user_data = get_user_model().objects.filter(username=username).first()
                     # Redirect to patient dashboard with user data
+<<<<<<< HEAD
                     
                     return redirect('patient_dashboard', username=username)
+=======
+                    return redirect('patient_dashboard', user_data=user_data)
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3
                 else:
                     messages.error(request, 'Your account is not active.')
                     print(f"Authentication failed - Inactive user: {user}")
@@ -77,10 +84,15 @@ def patient_login(request):
 
     return render(request, 'patient_login.html', {'form': form})
 
+<<<<<<< HEAD
 def patient_dashboard(request,username):
     user_data = get_user_model().objects.filter(username=username).first()
     return render(request, 'patient_dashboard.html', {'user_data': user_data})
     # return render(request, 'patient_dashboard.html')
+=======
+def patient_dashboard(request):
+    return render(request, 'patient_dashboard.html')
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3
 
 def patient_logout(request):
     logout(request)
@@ -113,4 +125,10 @@ def admin_login(request):
     else:
         form = AdminLoginForm()
 
+<<<<<<< HEAD
     return render(request, 'admin_login.html', {'form': form})
+=======
+    return render(request, 'admin_login.html', {'form': form})
+
+
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3

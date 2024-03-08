@@ -1,4 +1,5 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Person, UserProfile, Doctor
 
@@ -35,3 +36,16 @@ admin.site.register(UserProfile)
 
 #admin.site.register(invoices)
 # Weekly invoices
+=======
+from .models import Patient
+
+class PatientAdmin(admin.ModelAdmin):
+    list_display = ('firstname', 'lastname', 'username', 'email', 'birth_date')
+    search_fields = ('firstname', 'lastname', 'username', 'email')
+
+admin.site.register(Patient, PatientAdmin)
+
+
+
+
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3

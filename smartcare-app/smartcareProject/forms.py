@@ -9,6 +9,7 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
+<<<<<<< HEAD
         #CustomUser
         fields = ['username', 'email', 'password1', 'password2', 'role']
 
@@ -25,6 +26,10 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ['username', 'email','password1', 'password2']
 
+=======
+        fields = ['username', 'email','password1', 'password2']
+        
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3
 class StaffLoginForm(forms.Form):
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -32,7 +37,15 @@ class StaffLoginForm(forms.Form):
 class PatientLoginForm(forms.Form):
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+<<<<<<< HEAD
 
 class AdminLoginForm(forms.Form):
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+=======
+    
+class AdminLoginForm(forms.Form):
+    username = forms.CharField(label='Username')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3

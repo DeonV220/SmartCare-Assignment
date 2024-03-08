@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.contrib.auth import get_user_model
+=======
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 
@@ -40,6 +44,7 @@ class UserProfile(AbstractUser):
     password = models.CharField(max_length=128, default='default_password',  null=True)
 
     def __str__(self):
+<<<<<<< HEAD
         return str(self.user)
 
 
@@ -68,3 +73,17 @@ class Person(models.Model):
         return f"{self.first_name} {self.last_name} ({self.email})"
 
 # make person appear in the admin (user part)
+=======
+        return self.username
+
+class Patient(models.Model):
+    firstname = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255)
+    username = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    birth_date = models.DateField(null=True, blank=True)
+    password = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname}"
+>>>>>>> 9438346da8a2c09c13b54b91260cb704c29434c3
