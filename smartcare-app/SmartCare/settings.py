@@ -33,12 +33,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'smartcareProject',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'smartcareProject',
+      
+    
 ]
 
 MIDDLEWARE = [
@@ -101,8 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'smartcareProject.CustomUser'
+AUTH_USER_MODEL = 'smartcareProject.CustomUser' # refers to the second app
 
+#smartcareProject.CustomUser
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
