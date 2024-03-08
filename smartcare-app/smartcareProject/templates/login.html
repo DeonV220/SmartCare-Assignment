@@ -4,7 +4,7 @@
 
 {% block content %}
   <h2>Login</h2>
-  <form method="post" action="{% url 'login' %}">
+  <form method="post" action="{% url 'patient_login' %}">
     {% csrf_token %}
     <label for="id_username">Username:</label>
     <input type="text" name="username" id="id_username" required>

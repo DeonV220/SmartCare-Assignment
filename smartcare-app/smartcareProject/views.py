@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, StaffLoginForm, PatientLoginForm, AdminLoginForm
 from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+from django.contrib import messages
 
 # Role selection view
 def select_role(request):
@@ -40,14 +46,40 @@ def patient_login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
+
             if user is not None:
-                login(request, user)
-                # Redirect to patient dashboard or any other patient-specific page
-                return redirect('patient_dashboard')
+                if user.is_active:
+                    login(request, user)
+                    request.user = user  # Mark the user as authenticated
+                    messages.success(request, 'Login successful')
+                    # Fetch user data from the database
+                    user_data = get_user_model().objects.filter(username=username).first()
+                    # Redirect to patient dashboard with user data
+                    return redirect('patient_dashboard', user_data=user_data)
+                else:
+                    messages.error(request, 'Your account is not active.')
+                    print(f"Authentication failed - Inactive user: {user}")
+            else:
+                messages.error(request, 'Invalid username or password. Please try again.')
+                print(f"Authentication failed - Username: {username}")
+                return redirect('patient_login')  # Redirect back to the login page on authentication failure
+
+        else:
+            messages.error(request, 'Form is not valid. Please check the inputs.')
+            print("Form is not valid. Please check the inputs.")
+            return redirect('patient_login')  # Redirect back to the login page on form validation failure
+
     else:
         form = PatientLoginForm()
 
     return render(request, 'patient_login.html', {'form': form})
+
+def patient_dashboard(request):
+    return render(request, 'patient_dashboard.html')
+
+def patient_logout(request):
+    logout(request)
+    return redirect('patient_login') 
 
 def patient_signup(request):
     if request.method == 'POST':
